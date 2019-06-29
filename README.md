@@ -25,8 +25,8 @@ _ Pop a value; move right if value = 0, left otherwise.
 \ Swap two values on top of the stack. If there is only one value, pretend there is an extra 0 on bottom of the stack.
 $ Pop value from the stack and discard it.
 . Pop value and output as an integer.
-, Pop value and output the ASCII character represented by the integer code that is stored in the value.
-# Trampoline: Skip next cell.
+, Pop value and output the ASCII character represented by the integer code that is stored in the value.\
+/# Trampoline: Skip next cell.
 p A "put" call (a way to store a value for later use). Pop y, x and v, then change the character at the position (x,y) in the program to the character with ASCII value v.
 g A "get" call (a way to retrieve data in storage). Pop y and x, then push ASCII value of the character at that position in the program.
 @ End program.
