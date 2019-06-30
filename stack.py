@@ -24,7 +24,8 @@ class Stack:
     def duplicate(self):
         if not self.is_empty():
             self.push(self.items[-1])
-        self.push(0)
+        else:
+            self.push(0)
 
     def swap(self):
         if not self.is_empty():

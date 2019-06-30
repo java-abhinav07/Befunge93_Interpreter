@@ -22,7 +22,7 @@ def befunge(code):
     math = ['+', '-', '/', "*", "%",]
     logical = ["`", "!"]
     conditional = ["_", "|"]
-    move = (1, 0)
+    move = (0, 1)
     strmode = False
 
     length = len(code)
@@ -47,7 +47,7 @@ def befunge(code):
             print('Stack object', Stk.get_stack())
 
             if current.isdigit():
-                Stk.push(current)
+                Stk.push(int(current))
 
             elif current in math:
                 Stk.push(math_op(Stk.pop(), Stk.pop(), current))
@@ -89,8 +89,9 @@ def befunge(code):
                     print('popped', num)
                     output.append(num)
             elif current == ',':
-                letter = Stk.pop()
-                output.append(chr(letter))
+                while not Stk.is_empty():
+                    letter = Stk.pop()
+                    output.append(chr(letter))
             elif current == '#':
                 move = (2 * move[0], 2 * move[1])
             elif current == '"':
@@ -113,7 +114,7 @@ def befunge(code):
     return ''.join(output)
 
 
-print(befunge('>987v>.v\nv456<  :\n>321 ^ _@'))
+print(befunge('64+"!dlroW ,olleH">:#,_@'))
 
 
 
