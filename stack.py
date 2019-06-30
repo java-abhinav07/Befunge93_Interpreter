@@ -6,12 +6,13 @@ class Stack:
     def is_empty(self):
         return self.items == []
 
-    def push(self, item):
-        self.items.append(item)
+    def push(self, data):
+        self.items.append(data)
 
     def pop(self):
         if not self.is_empty():
             return self.items.pop()
+        return 0
 
     def peek(self):
         if not self.is_empty():
@@ -22,8 +23,8 @@ class Stack:
 
     def duplicate(self):
         if not self.is_empty():
-            return self.push(self.items[-1])
-        return self.push(0)
+            self.push(self.items[-1])
+        self.push(0)
 
     def swap(self):
         if not self.is_empty():
