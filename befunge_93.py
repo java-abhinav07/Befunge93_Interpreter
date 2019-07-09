@@ -4,8 +4,8 @@ import random
 
 def math_op(a, b, current):
     operations = {
-        '+': a+ b,
-        '-': a - b,
+        '+': a + b,
+        '-': b - a,
         '/': b // a if a != 0 else 0,
         '%': b % a if a != 0 else 0,
         '*': a * b
@@ -19,20 +19,18 @@ def befunge(code):
     code = code.split('\n')
     output = []
     directions = {">": (0, 1), "<": (0, -1), "v": (1, 0), "^": (-1, 0)}
-    math = ['+', '-', '/', "*", "%",]
+    math = ['+', '-', '/', "*", "%"]
     logical = ["`", "!"]
     conditional = ["_", "|"]
-    move = (0, 1)
+
     strmode = False
 
     length = len(code)
-    x_len = []
-    for i in range(length):
-        x_len.append(len(code[i]))
-    width = max(x_len)
+    width = len(code[0])
 
     current = code[0][0]
     coordinates = [0, 0]
+    move = (0, 1)
     Stk = Stack()
     while current != '@':
         if strmode:
@@ -70,7 +68,7 @@ def befunge(code):
                 elif current == '|':
                     val = Stk.pop()
                     if val == 0:
-                        move(-1, 0)
+                        move = (-1, 0)
                     else:
                         move = (1, 0)
 
@@ -84,14 +82,11 @@ def befunge(code):
             elif current == '$':
                 Stk.pop()
             elif current == '.':
-                while not Stk.is_empty():
-                    num = Stk.pop()
-                    print('popped', num)
-                    output.append(num)
+                num = Stk.pop()
+                output.append(str(num))
             elif current == ',':
-                while not Stk.is_empty():
-                    letter = Stk.pop()
-                    output.append(chr(letter))
+                letter = Stk.pop()
+                output.append(str(chr(letter)))
             elif current == '#':
                 move = (2 * move[0], 2 * move[1])
             elif current == '"':
@@ -106,23 +101,19 @@ def befunge(code):
         coordinates[1] = coordinates[1] + move[1]
 
         # rationalize coordinates
-        coordinates = [(length+coordinates[0])%length, (width + coordinates[1])%width]
+        if coordinates[1] > width:
+            coordinates[1] = coordinates[1] % width
+            coordinates[0] = coordinates[0] + (coordinates[1] // width)
+            if coordinates[0] > length:
+                coordinates[0] = coordinates[0] % length
+        if coordinates[0] > length:
+            coordinates[0] = coordinates[0] % length
+            coordinates[1] = coordinates[1] + (coordinates[0] // length)
+            if coordinates[0] > width:
+                coordinates[0] = coordinates[0] % width
 
         # set pointer
         current = code[coordinates[0]][coordinates[1]]
-
     return ''.join(output)
-
-
-print(befunge('64+"!dlroW ,olleH">:#,_@'))
-
-
-
-
-
-
-
-
-
 
 
