@@ -91,6 +91,8 @@ def befunge(code):
                 move = (2 * move[0], 2 * move[1])
             elif current == '"':
                 strmode = True
+            elif current == "\\":
+                Stk.swap()
 
             # elif current == 'p':
 
@@ -115,5 +117,7 @@ def befunge(code):
         # set pointer
         current = code[coordinates[0]][coordinates[1]]
     return ''.join(output)
+
+
 
 
