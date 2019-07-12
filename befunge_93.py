@@ -94,9 +94,17 @@ def befunge(code):
             elif current == "\\":
                 Stk.swap()
 
-            # elif current == 'p':
+            elif current == 'g':
+                xc = Stk.pop()
+                yc = Stk.pop()
+                Stk.push(chr(code[yc][xc]))
 
-            # elif current == 'g':
+            elif current == 'p':
+                xc = Stk.pop()
+                yc = Stk.pop()
+                vc = Stk.pop()
+                tobepushed = chr(vc)
+                code[xc][yc] = tobepushed
 
         # move in a given direction
         coordinates[0] = coordinates[0] + move[0]
@@ -119,5 +127,5 @@ def befunge(code):
     return ''.join(output)
 
 
-
+print(befunge('01->1# +# :# 0# g# ,# :# 5# 8# *# 4# +# -# _@'))
 

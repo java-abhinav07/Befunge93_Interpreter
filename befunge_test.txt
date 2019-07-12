@@ -1,0 +1,12 @@
+print(befunge('>25*"!dlroW olleH":v \n'
+              '                v:,_@\n'
+              '                >  ^ '))
+
+print(befunge('>987v>.v \n'
+              'v456<  : \n'
+              '>321 ^ _@'))
+
+print(befunge('08>:1-:v v *_$.@\n'
+              '  ^    _$>\:^'))
+
+print(befunge('01->1# +# :# 0# g# ,# :# 5# 8# *# 4# +# -# _@'))
